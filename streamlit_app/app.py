@@ -24,8 +24,9 @@ with open(MLB_PATH, 'rb') as f:
 st.title("Movie Rating Prediction")
 
 
-runtime = st.number_input("Runtime (minutes)", min_value=0)
-is_adult = st.selectbox("Adult Movie?", [0, 1])
+runtime = st.number_input("Runtime (minutes)", min_value=40, max_value=240, value = 100)
+is_adult_str = st.selectbox("Adult Movie?", ["No", "Yes"])
+is_adult = 1 if is_adult_str == "Yes" else 0
 selected_genres = st.multiselect("Select Genres", options=mlb.classes_)
 
 
