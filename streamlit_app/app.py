@@ -20,19 +20,18 @@ with open(SCALER_PATH, 'rb') as f:
 with open(MLB_PATH, 'rb') as f:
     mlb = pickle.load(f)
 
-# --- Streamlit app ---
+
 st.title("Movie Rating Prediction")
 
-# Inputs
+
 runtime = st.number_input("Runtime (minutes)", min_value=0)
 is_adult = st.selectbox("Adult Movie?", [0, 1])
 selected_genres = st.multiselect("Select Genres", options=mlb.classes_)
 
-# --- Preprocess inputs ---
-# Scale runtime
+
 runtime_scaled = scaler.transform([[runtime]])[0][0]
 
-# Encode genres
+
 genres_encoded = mlb.transform([selected_genres])
 genres_df = pd.DataFrame(genres_encoded, columns=mlb.classes_)
 
